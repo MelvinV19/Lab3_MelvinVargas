@@ -30,6 +30,8 @@ int* ordenar(int*,int);
 //funcion para mostrar la fecha
 void fecha(string,string,string);
 
+//funcion para las medianas
+void medianas(int*,int);
 //main
 int main(){
 	int op=0;
@@ -114,6 +116,28 @@ int menu(){
 		cout<<"Ingrese numero de ejercicio: ";
 		cin>>num;
 		return num;
+	}
+}
+
+//funcion para las medianas
+void medianas(int* arreglo,int size){
+	int medio=size/2;
+	if(size>5){
+		int division=size/5;
+		int residuop=size%5;
+		int** matriz= new int*[5];
+		for(int i=0;i<size;i++){
+			matriz[i]=new int[division];
+		}
+		int cont=0;
+		for(int i=0;i<division;i++){
+			for(int j=0;i<5;j++){
+				if(cont<size){
+					cont=cont+1;
+				}
+			}
+		}
+		
 	}
 }
 
