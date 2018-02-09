@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 //Funcion del menu
@@ -23,6 +24,12 @@ int* lectura(int*,int);
 //funcion para permutar el numero
 void permutar(char*);
 
+//funcion para ordenar un arreglo
+int* ordenar(int*,int);
+
+//funcion para mostrar la fecha
+void fecha(string,string,string);
+
 //main
 int main(){
 	int op=0;
@@ -35,11 +42,11 @@ int main(){
 					   cin>>tam;
 					   arreglo=createArray(tam);
 					   arreglo=lectura(arreglo,tam);
+					   arreglo=ordenar(arreglo,tam);
 					   imprimir(arreglo,tam);
 					   cout<<endl;
-					}
-				break;
-
+				   }
+				   break;
 			case 2:{
 					   string numero;
 					   char* arreglo=new char[4];
@@ -51,39 +58,40 @@ int main(){
 					   }
 					   for(int i=0;i<5;i++){
 						   arreglo[i]=numero[i]; 
-						}
+					   }
 					   permutar(arreglo);
-					   
-				}
-				break;
+				   }
+				   break;
+
 			case 3:{
-					   string fecha;
-				}
+					   string fechas;
+					   string year;
+					   string mes;
+					   string dia;
+					   cout<<"Ingrese fecha en formato YYYY/MM/DD: ";
+					   cin>>fechas;
+					   vector<string> date;
+					   for(int i=0;i<fechas.length();i++){
+							if(i>=0&&i<=3){
+								year+=fechas[i];
+							}
+							if(i>=4&&i<=5){
+								mes+=fechas[i];
+							}
+							if(i>=6&&i<=7){
+								dia+=fechas[i];
+							}
+					   }
+					   fecha(year, mes, dia);
+
+
+				   }
 				break;
 				   
 			case 4:{
-
 				}
-				break;		   
+				break;
 		}
-	}
-	return 0;
-}
-
-
-//funcion del menu
-int menu(){
-	int bandera=0;
-	int num=0;
-	while(bandera==0){
-		cout<<"**********Menu**********"<<endl;
-		cout<<"1.Poda y busca"<<endl;
-		cout<<"2.Permutacion"<<endl;
-		cout<<"3.Fechas"<<endl;
-		cout<<"4.Salir"<<endl;
-		cout<<"Ingrese nuemero de opcion que desea evaluar: ";
-		cin>>num;
-		return num;
 	}
 }
 
@@ -93,6 +101,21 @@ int*createArray(int size){
 	return ret;
 }
 
+//funcion menu
+int menu(){
+	int bandera=0;
+	int num=0;
+	while(bandera==0){
+		cout<<"**********Menu***********"<<endl;
+		cout<<"1.Poda y Busca"<<endl;
+		cout<<"2.Permutacion"<<endl;
+		cout<<"3.Fecha"<<endl;
+		cout<<"4.salir"<<endl;
+		cout<<"Ingrese numero de ejercicio: ";
+		cin>>num;
+		return num;
+	}
+}
 
 //genera numero random
 int aleatorio(){
@@ -121,6 +144,108 @@ void imprimir(char* arreglo){
 	for(int i=0;i<4;i++){
 		cout<<" "<<arreglo[i];
 	}	
+}
+
+//funcion para ordenar arreglo
+int* ordenar(int* arreglo,int size){
+	int auxiliar;
+	for(int i=0;i<size;i++){
+		for(int j=i+1;j<size;j++){
+			if(arreglo[i]>arreglo[j]){
+				auxiliar=arreglo[i];
+				arreglo[i]=arreglo[j];
+				arreglo[j]=auxiliar;
+			}
+			
+		}
+	}
+	return arreglo;
+}
+
+//funcion para la fecha
+void fecha(string year, string mes, string dia){
+	int modulomes;
+	int mes1;
+	int dia1;
+	int year1;
+	int fecha;
+	year1=atoi(year.c_str());
+	dia1=atoi(dia.c_str());
+	mes1=atoi(mes.c_str());
+	if(mes == "01"){
+		cout<<"Enero,";
+		modulomes=0;
+	}
+	if(mes == "02"){
+		cout<<"Febrero,";
+		modulomes=3;
+	}
+	if(mes == "03"){
+		cout<<"Marzo,";
+		modulomes=3;
+	}
+	if(mes == "04"){
+		cout<<"Abril,";
+		modulomes=6;
+	}
+	if(mes == "05"){
+		cout<<"Mayo,";
+		modulomes=1;
+	}
+	if(mes == "06"){
+		cout<<"Junio,";
+		modulomes=4;
+	}
+	if(mes == "07"){
+		cout<<"Julio,";
+		modulomes=6;
+	}
+	if(mes == "08"){
+		cout<<"Agosto,";
+		modulomes=2;
+	}
+	if(mes == "09"){
+		cout<<"Septiembre,";
+		modulomes=5;
+	}
+	if(mes == "10"){
+		cout<<"Octubre,";
+		modulomes=0;
+	}
+	if(mes == "11"){
+		cout<<"Noviembre,";
+		modulomes=3;
+	}
+	if(mes == "12"){
+		cout<<"Diciembre,";
+		modulomes=5;
+	}
+	dia1=((year1-1)%7+ ((year1-1)/4 -(3*((year1-1)/100+1)/4))%7+modulomes+fecha%7)%7;
+	if(dia1==0){
+		cout<<"Domingo, ";
+	}
+	if(dia1==1){
+		cout<<"Lunes, ";
+	}
+	if(dia1==2){
+		cout<<"Martes, ";
+	}
+	if(dia1==3){
+		cout<<"Miercoles, ";
+	}
+	if(dia1==4){
+		cout<<"Jueves, ";
+	}
+	if(dia1==5){
+		cout<<"Viernes, ";
+	}
+	if(dia1==6){
+		cout<<"Sabado, ";
+	}
+	cout<<dia<<", ";
+	cout<<year<<endl;
+
+	
 }
 
 //funcion para permutar
@@ -207,6 +332,8 @@ void permutar(char* arreglo){
 		narreglo[1]=arreglo[0];
 		narreglo[2]=arreglo[1];
 		narreglo[3]=arreglo[3];
+		imprimir(narreglo);
+		cout<<endl;
 
 
 
