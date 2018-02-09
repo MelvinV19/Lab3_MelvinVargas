@@ -170,7 +170,7 @@ void fecha(string year, string mes, string dia){
 	int year1;
 	int fecha;
 	year1=atoi(year.c_str());
-	dia1=atoi(dia.c_str());
+	fecha=atoi(dia.c_str());
 	mes1=atoi(mes.c_str());
 	if(mes == "01"){
 		cout<<"Enero,";
